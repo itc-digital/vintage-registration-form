@@ -1,28 +1,30 @@
-import { version, Component } from "inferno";
-import "./registerServiceWorker";
-import Logo from "./logo";
-import styled from "styled-components";
-import "./App.css";
+import { version, Component } from 'inferno';
+import styled from 'styled-components';
+import Window from './Window';
+import Button from './Button';
+import TextInput from './TextInput';
 
-const Test = styled.div`
-  border: 1px solid pink;
+const Container = styled.div`
+    padding: 8px;
 `;
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <Logo width="80" height="80" />
-          <h1>{`Welcome to Inferno ${version}`}</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Test />
-      </div>
-    );
-  }
+    state = {
+        name: '',
+
+    }
+
+    render() {
+        return (
+            <Container>
+                <Window>
+                    Привет
+                    <Button>Тык</Button>
+                    <TextInput />
+                </Window>
+            </Container>
+        );
+    }
 }
 
 export default App;
