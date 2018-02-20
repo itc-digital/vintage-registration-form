@@ -7,6 +7,7 @@ import Button from './Button';
 import Input from './Input';
 import Label from './Label';
 import DropdownSelect from './DropdownSelect';
+import FileInput from './FileInput';
 import { H1, P } from './Typography';
 import { RowSpacing, HR, Inline } from './Markup';
 
@@ -16,7 +17,7 @@ const FormContainer = styled.form`
 
 class App extends Component {
     state = {
-        page: 2,
+        page: 3,
         name: ''
     };
 
@@ -30,6 +31,10 @@ class App extends Component {
         }
     };
 
+    handleFileChange = e => {
+        this.props.setFieldValue('file', e.currentTarget.files);
+    };
+
     render() {
         const { page } = this.state;
         const {
@@ -39,7 +44,8 @@ class App extends Component {
             handleChange,
             handleBlur,
             handleSubmit,
-            isSubmitting
+            isSubmitting,
+            setFieldValue
         } = this.props;
 
         return (
@@ -145,7 +151,23 @@ class App extends Component {
                                         <Label>Факультет</Label>
                                     </Col>
                                     <Col xs={8}>
-                                        <DropdownSelect values={['ФМЭСИ', 'ГРТСИ']} />
+                                        <DropdownSelect
+                                            values={['ФМЭСИ', 'ГРТСИ']}
+                                        />
+                                    </Col>
+                                </Row>
+                            </div>
+                        )}
+
+                        {page === 3 && (
+                            <div>
+                                <Row>
+                                    <Col xs={12}>
+                                        <FileInput
+                                            name="file"
+                                            onChange={this.handleFileChange}
+                                            files={values.file}
+                                        />
                                     </Col>
                                 </Row>
                             </div>
