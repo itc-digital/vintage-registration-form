@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-const Button = styled.div`
-    width: 100%;
+const Button = styled.button`
+    width: ${({ width }) => (width ? width : '100%')};
     padding: 2px;
-    font-size: .75rem;
+    font-size: 0.75rem;
     text-align: center;
     background: #bdbdbd;
     outline: none;
@@ -13,6 +13,7 @@ const Button = styled.div`
     border-right-color: #6f6f71;
     border-bottom-color: #6f6f71;
     color: #000;
+    cursor: 
 
     :active {
         border-left-color: #6f6f71;

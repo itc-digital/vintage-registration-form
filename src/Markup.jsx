@@ -12,4 +12,5 @@ export const HR = styled.hr`
 
 export const Inline = styled.div`
     display: flex;
+    ${({ right }) => (right ? 'justify-content: flex-end;' : '')};
 `;

@@ -1,20 +1,22 @@
 import { Component } from 'inferno';
 import styled from 'styled-components';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { withFormik } from 'formik';
 import Window from './Window';
 import Button from './Button';
-import TextInput from './TextInput';
+import Input from './Input';
 import Label from './Label';
+import DropdownSelect from './DropdownSelect';
 import { H1, P } from './Typography';
 import { RowSpacing, HR, Inline } from './Markup';
 
-const Container = styled.div`
-    min-width: 272px;
+const FormContainer = styled.form`
+    width: 304px;
 `;
 
 class App extends Component {
     state = {
-        page: 0,
+        page: 2,
         name: ''
     };
 
@@ -29,13 +31,20 @@ class App extends Component {
     };
 
     render() {
-        // Регистрация на курсы ITC
-
         const { page } = this.state;
+        const {
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting
+        } = this.props;
 
         return (
-            <Container>
-                <Window title="Test">
+            <FormContainer onSubmit={handleSubmit}>
+                <Window title="Регистрация на курсы ITC">
                     <Grid fluid>
                         <Row>
                             <Col xs={12}>
@@ -60,7 +69,13 @@ class App extends Component {
                                         <Label>Имя</Label>
                                     </Col>
                                     <Col xs={8}>
-                                        <TextInput />
+                                        <Input
+                                            type="text"
+                                            name="firstname"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.firstname}
+                                        />
                                     </Col>
                                 </Row>
 
@@ -71,7 +86,13 @@ class App extends Component {
                                         <Label>Фамилия</Label>
                                     </Col>
                                     <Col xs={8}>
-                                        <TextInput />
+                                        <Input
+                                            type="text"
+                                            name="lastname"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.lastname}
+                                        />
                                     </Col>
                                 </Row>
                             </div>
@@ -89,10 +110,10 @@ class App extends Component {
 
                                 <Row>
                                     <Col xs={4}>
-                                        <Label>Профиль VK</Label>
+                                        <Label>Линк VK</Label>
                                     </Col>
                                     <Col xs={8}>
-                                        <TextInput />
+                                        <Input />
                                     </Col>
                                 </Row>
 
@@ -103,7 +124,7 @@ class App extends Component {
                                         <Label>Email</Label>
                                     </Col>
                                     <Col xs={8}>
-                                        <TextInput />
+                                        <Input />
                                     </Col>
                                 </Row>
                             </div>
@@ -124,7 +145,7 @@ class App extends Component {
                                         <Label>Факультет</Label>
                                     </Col>
                                     <Col xs={8}>
-                                        Селект
+                                        <DropdownSelect />
                                     </Col>
                                 </Row>
                             </div>
@@ -142,13 +163,19 @@ class App extends Component {
 
                         <Row end="xs">
                             <Col xs={page > 0 ? 8 : 4}>
-                                <Inline>
+                                <Inline right>
                                     {page > 0 && (
-                                        <Button onClick={this.prevPage}>
+                                        <Button
+                                            width="100px"
+                                            onClick={this.prevPage}
+                                        >
                                             {'<'} Назад
                                         </Button>
                                     )}
-                                    <Button onClick={this.nextPage}>
+                                    <Button
+                                        width="100px"
+                                        onClick={this.nextPage}
+                                    >
                                         Далее >
                                     </Button>
                                 </Inline>
@@ -156,9 +183,24 @@ class App extends Component {
                         </Row>
                     </Grid>
                 </Window>
-            </Container>
+            </FormContainer>
         );
     }
 }
 
-export default App;
+export default withFormik({
+    mapPropsToValues: props => ({ firstname: '', lastname: '' }),
+    validate: (values, props) => {
+        return {};
+    },
+    handleSubmit: (
+        values,
+        {
+            props,
+            setSubmitting,
+            setErrors /* setValues, setStatus, and other goodies */
+        }
+    ) => {
+        // submit
+    }
+})(App);

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "formik": "^0.11.10",
     "inferno": "^4.0.3",
     "inferno-clone-vnode": "^4.0.3",
     "inferno-compat": "^4.0.3",
@@ -10,6 +11,7 @@
     "inferno-create-class": "^4.0.3",
     "inferno-create-element": "^4.0.3",
     "inferno-scripts": "6.0.0",
+    "normalize.css": "^8.0.0",
     "react-flexbox-grid": "^2.0.0",
     "styled-components": "^3.1.6"
   },

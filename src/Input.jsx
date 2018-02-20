@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
-const TextInput = styled.input`
+const Input = styled.input`
     width: 100%;
     padding: 2px;
     font-size: 12px;
     box-sizing: border-box;
-    border-left-color: #d2d2d2;
-    border-top-color: #d1d1d1;
+    border: 2px solid #d2d2d2;
+    border-left-color: #6f6f71;
+    border-top-color: #6f6f71;
     border-right-color: #d2d2d2;
     border-bottom-color: #d1d1d1;
     background: #fff;
@@ -16,4 +17,4 @@ const TextInput = styled.input`
     }
 `;
 
-export default props => <TextInput type="text" {...props} />;
+export default props => <Input {...props} />;
