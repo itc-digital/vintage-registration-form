@@ -162,18 +162,18 @@ class App extends Component {
                         <RowSpacing scale={2} />
 
                         <Row end="xs">
-                            <Col xs={page > 0 ? 8 : 4}>
+                            <Col xs={12}>
                                 <Inline right>
                                     {page > 0 && (
                                         <Button
-                                            width="100px"
+                                            width="80px"
                                             onClick={this.prevPage}
                                         >
                                             {'<'} Назад
                                         </Button>
                                     )}
                                     <Button
-                                        width="100px"
+                                        width="80px"
                                         onClick={this.nextPage}
                                     >
                                         Далее >
