@@ -15,4 +15,14 @@ body {
     padding: 4px;
     box-sizing: border-box;
     font-family: 'Microsoft Sans Serif', sans-serif;
+    font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Microsoft Serif', 'Times New Roman', serif;
 }

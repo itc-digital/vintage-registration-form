@@ -1,4 +1,3 @@
-import { Component } from 'inferno';
 import styled from 'styled-components';
 
 const Window = styled.div`
@@ -47,10 +46,10 @@ const Content = styled.div`
     padding: 8px;
 `;
 
-export default ({ children }) => (
+export default ({ title, children }) => (
     <Window>
         <Bar>
-            <Title>Регистрация на курсы ITC</Title>
+            <Title>{title}</Title>
             <CloseButton />
         </Bar>
         <Content>{children}</Content>

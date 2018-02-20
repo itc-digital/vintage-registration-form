@@ -1,9 +1,9 @@
-import { Component } from 'inferno';
 import styled from 'styled-components';
 
 const Button = styled.div`
+    width: 100%;
     padding: 2px;
-    font-size: 14px;
+    font-size: .75rem;
     text-align: center;
     background: #bdbdbd;
     outline: none;

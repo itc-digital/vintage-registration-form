@@ -10,6 +10,7 @@
     "inferno-create-class": "^4.0.3",
     "inferno-create-element": "^4.0.3",
     "inferno-scripts": "6.0.0",
+    "react-flexbox-grid": "^2.0.0",
     "styled-components": "^3.1.6"
   },
   "scripts": {
