@@ -1,8 +1,10 @@
+import { Component } from 'inferno';
 import styled from 'styled-components';
 
 const Container = styled.div`
-    width: 100%;
+    position: relative;
     display: flex;
+    width: 100%;
     justify-content: space-between;
     height: 22px;
     font-size: 12px;
@@ -15,17 +17,67 @@ const Container = styled.div`
     background: #fff;
 `;
 
-const DropdownIcon = styled.button`
-    background: #bdbdbd;
+const OverlaySelect = styled.select`
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+`;
+
+const Value = styled.div`
+    padding: 3px;
+`;
+
+const DropdownIcon = styled.div`
+    padding: 0;
+    width: 16px;
+    cursor: default;
     border: 2px solid #6f6f71;
     border-left-color: #d2d2d2;
     border-top-color: #d1d1d1;
     border-right-color: #6f6f71;
     border-bottom-color: #6f6f71;
+    text-align: center;
+    background: #bdbdbd;
 `;
 
-export default () => (
-    <Container>
-        Селект<DropdownIcon>▾</DropdownIcon>
-    </Container>
-);
+class DropdownSelect extends Component {
+    state = {
+        selectedIndex: 0
+    };
+
+    handleChange = e => {
+        const { selectedIndex } = e.target;
+        const { onChange, values } = this.props;
+
+        this.setState({ selectedIndex });
+
+        if (onChange) {
+            onChange(values[selectedIndex]);
+        }
+    };
+
+    render() {
+        const { values } = this.props;
+        const { selectedIndex } = this.state;
+        const valuesWithDefault = ['Выберите...', ...values];
+
+        return (
+            <Container>
+                <OverlaySelect
+                    onChange={this.handleChange}
+                    value={valuesWithDefault[selectedIndex]}
+                >
+                    {valuesWithDefault.map((value, i) => (
+                        <option value={value} key={value} disabled={i === 0}>
+                            {value}
+                        </option>
+                    ))}
+                </OverlaySelect>
+                <Value>{valuesWithDefault[selectedIndex]}</Value>
+                <DropdownIcon>▾</DropdownIcon>
+            </Container>
+        );
+    }
+}
+
+export default DropdownSelect;

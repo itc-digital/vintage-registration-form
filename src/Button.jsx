@@ -13,7 +13,6 @@ const Button = styled.button`
     border-right-color: #6f6f71;
     border-bottom-color: #6f6f71;
     color: #000;
-    cursor: 
 
     :active {
         border-left-color: #6f6f71;

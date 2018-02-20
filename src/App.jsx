@@ -145,7 +145,7 @@ class App extends Component {
                                         <Label>Факультет</Label>
                                     </Col>
                                     <Col xs={8}>
-                                        <DropdownSelect />
+                                        <DropdownSelect values={['ФМЭСИ', 'ГРТСИ']} />
                                     </Col>
                                 </Row>
                             </div>
