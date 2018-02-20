@@ -17,7 +17,7 @@ const FormContainer = styled.form`
 
 class App extends Component {
     state = {
-        page: 3,
+        page: 0,
         name: ''
     };
 
