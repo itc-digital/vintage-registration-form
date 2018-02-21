@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-    width: ${({ width }) => (width ? width : '100%')};
+    width: ${({ width }) => width || '100%'};
     padding: 2px;
     font-size: 0.75rem;
     text-align: center;

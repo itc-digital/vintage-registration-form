@@ -37,17 +37,19 @@ const Label = styled.label`
     }
 `;
 
-const FileInput = ({ title, files, onChange, ...restProps }) => (
+const FileInput = ({
+    title, files, onChange, ...restProps
+}) => (
     <div>
         <Label>
-            {files ? files[0].name : title}
+            {files && files.length ? files[0].name : title}
             <InputHolder type="file" onChange={onChange} {...restProps} />
         </Label>
     </div>
 );
 
 FileInput.defaultProps = {
-    title: 'Прикрепить файл'
+    title: 'Прикрепить файл',
 };
 
 export default FileInput;

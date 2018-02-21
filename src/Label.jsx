@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
 export default styled.label`
-    font-size: .75rem;
-`
+    font-size: 0.75rem;
+`;

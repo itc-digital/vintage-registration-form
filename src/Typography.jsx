@@ -9,5 +9,5 @@ export const H1 = styled.h1`
 export const P = styled.p`
     margin: 0;
     padding: 0;
-    font-size: .875rem;
+    font-size: 0.875rem;
 `;

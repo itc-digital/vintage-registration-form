@@ -3,4 +3,4 @@ import 'normalize.css';
 import App from './App';
 import './index.css';
 
-render(<App />, document.getElementById('app'));
+render(<App />, document.getElementById('app')); // eslint-disable-line react/jsx-filename-extension
