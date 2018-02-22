@@ -44,9 +44,7 @@ class App extends Component {
                         <P>Представься пожалуйста.</P>
                     </Col>
                 </Row>
-
                 <RowSpacing scale={3} />
-
                 <Row>
                     <Col xs={4}>
                         <Label>Имя</Label>
@@ -60,9 +58,7 @@ class App extends Component {
                         />
                     </Col>
                 </Row>
-
                 <RowSpacing />
-
                 <Row>
                     <Col xs={4}>
                         <Label>Фамилия</Label>
@@ -77,6 +73,7 @@ class App extends Component {
                     </Col>
                 </Row>
             </div>,
+
             <div>
                 <Row>
                     <Col xs={12}>
@@ -90,9 +87,7 @@ class App extends Component {
                         </P>
                     </Col>
                 </Row>
-
                 <RowSpacing scale={3} />
-
                 <Row>
                     <Col xs={4}>
                         <Label>GitHub</Label>
@@ -106,9 +101,7 @@ class App extends Component {
                         />
                     </Col>
                 </Row>
-
                 <RowSpacing />
-
                 <Row>
                     <Col xs={4}>
                         <Label>Telegram</Label>
@@ -123,6 +116,7 @@ class App extends Component {
                     </Col>
                 </Row>
             </div>,
+
             <div>
                 <Row>
                     <Col xs={12}>
@@ -146,7 +140,20 @@ class App extends Component {
                     </Col>
                 </Row>
             </div>,
+
             <div>
+                <Row>
+                    <Col xs={12}>
+                        <P>
+                            Прикрепи скриншот, где видно пройденные первые пять
+                            глав{' '}
+                            <a href="http://pythontutor.ru/" target="_blank">
+                                Питонтьютора
+                            </a>
+                        </P>
+                    </Col>
+                </Row>
+                <RowSpacing scale={2} />
                 <Row>
                     <Col xs={12}>
                         <FileInput
