@@ -40,7 +40,8 @@ class App extends Component {
                     <Col xs={12}>
                         <P>
                             Привет! Хочешь записаться на наши курсы по
-                            разработке? Тогда заполни эту форму. Все поля обязательны для заполнения.
+                            разработке? Тогда заполни эту форму. Все поля
+                            обязательны для заполнения.
                         </P>
                         <P>Представься пожалуйста.</P>
                     </Col>
@@ -314,11 +315,19 @@ export default withFormik({
         telegram: '',
         files: []
     }),
-    handleSubmit: (values, { props, setSubmitting, setErrors }) => {
+    handleSubmit: (values, { props, setSubmitting, setStatus, setErrors }) => {
         const errors = validate(values);
         if (isEmptyObject(errors)) {
             console.log('submitting', values);
-            submit(values);
+            setSubmitting(true);
+            submit(values).then(isSuccessful => {
+                if (isSuccessful) {
+                    setStatus('success');
+                } else {
+                    setStatus('fail');
+                }
+                setSubmitting(false);
+            });
         } else {
             setErrors(errors);
         }

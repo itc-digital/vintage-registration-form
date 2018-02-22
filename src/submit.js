@@ -9,7 +9,9 @@ const submit = values => {
     formData.append('github', github);
     formData.append('telegram', telegram);
     formData.append('screenshot', files[0]);
-    return fetch(url, { method: 'POST', body: formData });
+    return fetch(url, { method: 'POST', body: formData }).then(
+        response => response.status === 200
+    );
 };
 
 export default submit;
