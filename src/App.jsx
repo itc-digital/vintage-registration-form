@@ -134,7 +134,20 @@ class App extends Component {
                     </Col>
                     <Col xs={8}>
                         <DropdownSelect
-                            values={['ФМЭСИ', 'ГРТСИ']}
+                            values={[
+                                'ФМЭСИ',
+                                'ФФ',
+                                'ФМа',
+                                'ФМе',
+                                'ФЭП',
+                                'ФЭТТ',
+                                'ГРТСИ',
+                                'МШБиМЭ',
+                                'Капитаны России',
+                                'ИУиСЭП',
+                                'БШМиП',
+                                'Integral'
+                            ]}
                             value={values.faculty}
                             name="faculty"
                             onChange={this.handleFacultyChange}
