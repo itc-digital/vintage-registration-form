@@ -14,6 +14,10 @@ import FileInput from './FileInput';
 import { H1, P, UList, Li } from './Typography';
 import { RowSpacing, HR, Inline, Center } from './Markup';
 
+const Container = styled.div`
+    width: 304px;
+`;
+
 const FormContainer = styled.form`
     width: 304px;
 `;
@@ -24,15 +28,7 @@ class App extends Component {
     };
 
     get pages() {
-        const {
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            isSubmitting,
-            setFieldValue
-        } = this.props;
+        const { values, handleChange } = this.props;
 
         return [
             <div>
@@ -40,7 +36,7 @@ class App extends Component {
                     <Col xs={12}>
                         <P>
                             Привет! Хочешь записаться на наши курсы по
-                            разработке? Тогда заполни эту форму. Все поля
+                            фронтэнду? Тогда заполни эту форму. Все поля
                             обязательны для заполнения.
                         </P>
                         <P>Представься пожалуйста.</P>
@@ -209,9 +205,40 @@ class App extends Component {
         e.preventDefault();
     };
 
+    resetStatus = e => {
+        this.props.setStatus(undefined);
+        e.preventDefault();
+    };
+
     render() {
         const { page } = this.state;
-        const { errors, handleSubmit } = this.props;
+        const { errors, handleSubmit, isSubmitting, status } = this.props;
+
+        if (status === 'success') {
+            return (
+                <Container>
+                    <Window title="Регистрация прошла успешно">
+                        <Grid fluid>
+                            <Row>
+                                <Col xs={12}>
+                                    <H1>Ура!</H1>
+                                </Col>
+                            </Row>
+                            <RowSpacing scale={2} />
+                            <Row>
+                                <Col xs={12}>
+                                    <P>
+                                        Заявка на поступление успешно
+                                        отправлена! Скоро мы свяжемся с тобой
+                                    </P>
+                                </Col>
+                            </Row>
+                            <RowSpacing scale={3} />
+                        </Grid>
+                    </Window>
+                </Container>
+            );
+        }
 
         return (
             <FormContainer onSubmit={handleSubmit}>
@@ -235,8 +262,42 @@ class App extends Component {
                             </UList>
                         </Window>
                     )}
+                    {status === 'fail' && (
+                        <Window title="Ошибка">
+                            <Grid fluid>
+                                <Row>
+                                    <Col xs={12}>
+                                        <H1>Упс...</H1>
+                                    </Col>
+                                </Row>
+                                <RowSpacing scale={2} />
+                                <Row>
+                                    <Col xs={12}>
+                                        <P>
+                                            При отправке заявки произошла
+                                            ошибка. Мы можем зарегистрировать
+                                            тебя вручную. Напиши{' '}
+                                            <a href="https://vk.com/mlshv42">
+                                                Мише
+                                            </a>
+                                            <RowSpacing scale={3} />
+                                            <Center>
+                                                <Button
+                                                    width="60px"
+                                                    onClick={this.resetErrors}
+                                                >
+                                                    ОK
+                                                </Button>
+                                            </Center>
+                                        </P>
+                                    </Col>
+                                </Row>
+                                <RowSpacing scale={1} />
+                            </Grid>
+                        </Window>
+                    )}
                 </ErrorsWrapper>
-                <Window title="Регистрация на курсы разработке от ITC">
+                <Window title="Регистрация на курсы разработки от ITC">
                     <Grid fluid>
                         <Row>
                             <Col xs={12}>
@@ -264,13 +325,20 @@ class App extends Component {
                                     {page > 0 && (
                                         <Button
                                             width="80px"
+                                            disabled={isSubmitting}
                                             onClick={this.prevPage}
                                         >
                                             {'<'} Назад
                                         </Button>
                                     )}
                                     {page === this.pages.length - 1 ? (
-                                        <Button width="80px">Готово</Button>
+                                        <Button
+                                            width="80px"
+                                            type="submit"
+                                            disabled={isSubmitting}
+                                        >
+                                            Готово
+                                        </Button>
                                     ) : (
                                         <Button
                                             width="80px"
@@ -345,6 +413,7 @@ export default withFormik({
             });
         } else {
             setErrors(errors);
+            setSubmitting(false);
         }
     }
 })(App);

@@ -24,6 +24,10 @@ const Button = styled.button`
     :focus {
         box-shadow: 0 0 0 1px black;
     }
+
+    :disabled {
+        color: #7a7a7a;
+    }
 `;
 
 export default props => <Button {...props} />;

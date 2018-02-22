@@ -52,7 +52,7 @@ class DropdownSelect extends Component {
 
     handleChange = e => {
         const { selectedIndex } = e.target;
-        const { onChange, values, value } = this.props;
+        const { onChange, values } = this.props;
 
         this.setState({ selectedIndex });
 

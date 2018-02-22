@@ -18,11 +18,12 @@ export const P = styled.p`
 export const UList = styled.ul`
     list-style-type: none;
     margin: 0.5rem 0;
-    padding: 0 0 0 .5rem;
+    padding: 0 0 0 0.5rem;
+    font-size: 0.875rem;
 `;
 
 export const Li = styled.li`
     :before {
-        content: " - "
+        content: ' - ';
     }
 `;
