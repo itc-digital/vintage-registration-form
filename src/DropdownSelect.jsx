@@ -42,17 +42,22 @@ const DropdownIcon = styled.div`
 
 class DropdownSelect extends Component {
     state = {
-        selectedIndex: 0,
+        selectedIndex: 0
     };
 
-    handleChange = (e) => {
+    componentDidMount() {
+        const { value, values } = this.props;
+        this.setState({ selectedIndex: values.indexOf(value) + 1 });
+    }
+
+    handleChange = e => {
         const { selectedIndex } = e.target;
-        const { onChange, values } = this.props;
+        const { onChange, values, value } = this.props;
 
         this.setState({ selectedIndex });
 
         if (onChange) {
-            onChange(values[selectedIndex]);
+            onChange(values[selectedIndex - 1]);
         }
     };
 

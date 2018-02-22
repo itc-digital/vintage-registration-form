@@ -2,14 +2,16 @@ import { Component } from 'inferno';
 import styled from 'styled-components';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { withFormik } from 'formik';
+import { isEmptyObject } from './utils';
 import Window from './Window';
+import ErrorsWrapper from './ErrorsWrapper';
 import Button from './Button';
 import Input from './Input';
 import Label from './Label';
 import DropdownSelect from './DropdownSelect';
 import FileInput from './FileInput';
-import { H1, P } from './Typography';
-import { RowSpacing, HR, Inline } from './Markup';
+import { H1, P, UList, Li } from './Typography';
+import { RowSpacing, HR, Inline, Center } from './Markup';
 
 const FormContainer = styled.form`
     width: 304px;
@@ -17,7 +19,7 @@ const FormContainer = styled.form`
 
 class App extends Component {
     state = {
-        page: 0,
+        page: 0
     };
 
     get pages() {
@@ -28,7 +30,7 @@ class App extends Component {
             handleChange,
             handleBlur,
             isSubmitting,
-            setFieldValue,
+            setFieldValue
         } = this.props;
 
         return [
@@ -36,12 +38,10 @@ class App extends Component {
                 <Row>
                     <Col xs={12}>
                         <P>
-                            Привет! Мы рады, что ты хочешь записаться на наши курсы по разработке.
+                            Привет! Хочешь записаться на наши курсы по
+                            разработке?
                         </P>
-                        <P>
-                            Но прежде, чем заполнять эту форму, не забудь выполнить вступительные
-                            испытания.
-                        </P>
+                        <P>Представься пожалуйста.</P>
                     </Col>
                 </Row>
 
@@ -56,7 +56,6 @@ class App extends Component {
                             type="text"
                             name="firstname"
                             onChange={handleChange}
-                            onBlur={handleBlur}
                             value={values.firstname}
                         />
                     </Col>
@@ -73,7 +72,6 @@ class App extends Component {
                             type="text"
                             name="lastname"
                             onChange={handleChange}
-                            onBlur={handleBlur}
                             value={values.lastname}
                         />
                     </Col>
@@ -82,7 +80,14 @@ class App extends Component {
             <div>
                 <Row>
                     <Col xs={12}>
-                        <P>Представьтесь пожалуйста</P>
+                        <P>
+                            Твои контакты. Если у тебя нет телеграма, придётся
+                            его сделать - мы будем общаться через него.
+                        </P>
+                        <P>
+                            Ещё мы будем работать с гитхабом, поэтому
+                            зарегистрируйся и там.
+                        </P>
                     </Col>
                 </Row>
 
@@ -90,15 +95,14 @@ class App extends Component {
 
                 <Row>
                     <Col xs={4}>
-                        <Label>Линк VK</Label>
+                        <Label>GitHub</Label>
                     </Col>
                     <Col xs={8}>
                         <Input
                             type="text"
-                            name="vk"
+                            name="github"
                             onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.vk}
+                            value={values.github}
                         />
                     </Col>
                 </Row>
@@ -114,7 +118,6 @@ class App extends Component {
                             type="text"
                             name="telegram"
                             onChange={handleChange}
-                            onBlur={handleBlur}
                             value={values.telegram}
                         />
                     </Col>
@@ -123,7 +126,7 @@ class App extends Component {
             <div>
                 <Row>
                     <Col xs={12}>
-                        <P>Представьтесь пожалуйста</P>
+                        <P>Где ты учишься?</P>
                     </Col>
                 </Row>
 
@@ -136,9 +139,9 @@ class App extends Component {
                     <Col xs={8}>
                         <DropdownSelect
                             values={['ФМЭСИ', 'ГРТСИ']}
+                            value={values.faculty}
                             name="faculty"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
+                            onChange={this.handleFacultyChange}
                         />
                     </Col>
                 </Row>
@@ -153,30 +156,64 @@ class App extends Component {
                         />
                     </Col>
                 </Row>
-            </div>,
+            </div>
         ];
     }
 
-    nextPage = () => {
-        this.setState(state => ({ page: state.page + 1 }));
+    nextPage = e => {
+        if (this.state.page < this.pages.length - 1) {
+            this.setState(state => ({ page: state.page + 1 }));
+        }
+        e.preventDefault();
     };
 
-    prevPage = () => {
+    prevPage = e => {
         if (this.state.page > 0) {
             this.setState(state => ({ page: state.page - 1 }));
         }
+        e.preventDefault();
     };
 
-    handleFilesChange = (e) => {
+    handleFilesChange = e => {
         this.props.setFieldValue('files', e.currentTarget.files);
+    };
+
+    handleFacultyChange = faculty => {
+        this.props.setFieldValue('faculty', faculty);
+    };
+
+    resetErrors = e => {
+        this.props.setErrors({});
+        e.preventDefault();
     };
 
     render() {
         const { page } = this.state;
-        const { handleSubmit } = this.props;
+        const { errors, handleSubmit } = this.props;
 
         return (
             <FormContainer onSubmit={handleSubmit}>
+                <ErrorsWrapper>
+                    {!isEmptyObject(errors) && (
+                        <Window title="Ошибка!">
+                            <UList>
+                                {Object.values(errors).map(value => (
+                                    <Li>{value}</Li>
+                                ))}
+
+                                <RowSpacing scale={3} />
+                                <Center>
+                                    <Button
+                                        width="60px"
+                                        onClick={this.resetErrors}
+                                    >
+                                        ОK
+                                    </Button>
+                                </Center>
+                            </UList>
+                        </Window>
+                    )}
+                </ErrorsWrapper>
                 <Window title="Регистрация на курсы разработке от ITC">
                     <Grid fluid>
                         <Row>
@@ -203,13 +240,23 @@ class App extends Component {
                             <Col xs={12}>
                                 <Inline right>
                                     {page > 0 && (
-                                        <Button width="80px" onClick={this.prevPage}>
+                                        <Button
+                                            width="80px"
+                                            onClick={this.prevPage}
+                                        >
                                             {'<'} Назад
                                         </Button>
                                     )}
-                                    <Button width="80px" onClick={this.nextPage}>
-                                        Далее {'>'}
-                                    </Button>
+                                    {page === this.pages.length - 1 ? (
+                                        <Button width="80px">Готово</Button>
+                                    ) : (
+                                        <Button
+                                            width="80px"
+                                            onClick={this.nextPage}
+                                        >
+                                            Далее {'>'}
+                                        </Button>
+                                    )}
                                 </Inline>
                             </Col>
                         </Row>
@@ -220,43 +267,53 @@ class App extends Component {
     }
 }
 
+const validate = values => {
+    const errors = {};
+
+    if (!values.firstname) {
+        errors.firstname = 'Укажи имя';
+    }
+
+    if (!values.lastname) {
+        errors.lastname = 'Укажи фамилию';
+    }
+
+    if (!values.github) {
+        errors.github = 'Укажи ник на GitHub';
+    }
+
+    if (!values.telegram) {
+        errors.telegram = 'Укажи ник в телеграме';
+    }
+
+    if (!values.faculty) {
+        errors.faculty = 'Укажи факультет';
+    }
+
+    if (!values.files.length) {
+        errors.fileds = 'Прикрепи скриншот c пройденным Питонтьютором';
+    }
+
+    return errors;
+};
+
 export default withFormik({
+    validateOnBlur: false,
     mapPropsToValues: () => ({
         firstname: '',
         lastname: '',
         vk: '',
         telegram: '',
-        files: [],
+        files: []
     }),
-    validate: (values, props) => {
-        const errors = {};
-
-        if (!values.firstname) {
-            errors.firstname = 'Укажи имя';
+    handleSubmit: (values, { props, setSubmitting, setErrors }) => {
+        console.log('handleSubmit');
+        const errors = validate(values);
+        if (isEmptyObject(errors)) {
+            console.log('submit', values);
+        } else {
+            console.log('errors');
+            setErrors(errors);
         }
-
-        if (!values.lastname) {
-            errors.lastname = 'Укажи фамилию';
-        }
-
-        if (!values.vk) {
-            errors.vk = 'Укажи ссылку VK';
-        }
-
-        if (!values.telegram) {
-            errors.telegram = 'Укажи ник в телеграме';
-        }
-
-        if (!values.faculty) {
-            errors.faculty = 'Укажи факультет';
-        }
-
-        return errors;
-    },
-    handleSubmit: (
-        values,
-        { props, setSubmitting, setErrors /* setValues, setStatus, and other goodies */ },
-    ) => {
-        // submit
-    },
+    }
 })(App);

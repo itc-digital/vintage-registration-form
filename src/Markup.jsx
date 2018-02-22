@@ -14,3 +14,8 @@ export const Inline = styled.div`
     display: flex;
     ${({ right }) => (right ? 'justify-content: flex-end;' : '')};
 `;
+
+export const Center = styled.div`
+    display: flex;
+    justify-content: center;
+`;
