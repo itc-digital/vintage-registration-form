@@ -323,8 +323,10 @@ export default withFormik({
             submit(values).then(isSuccessful => {
                 if (isSuccessful) {
                     setStatus('success');
+                    console.log('success');
                 } else {
                     setStatus('fail');
+                    console.log('fail');
                 }
                 setSubmitting(false);
             });
