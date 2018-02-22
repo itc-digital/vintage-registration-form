@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { withFormik } from 'formik';
 import { isEmptyObject } from './utils';
+import submit from './submit';
 import Window from './Window';
 import ErrorsWrapper from './ErrorsWrapper';
 import Button from './Button';
@@ -39,7 +40,7 @@ class App extends Component {
                     <Col xs={12}>
                         <P>
                             Привет! Хочешь записаться на наши курсы по
-                            разработке?
+                            разработке? Тогда заполни эту форму. Все поля обязательны для заполнения.
                         </P>
                         <P>Представься пожалуйста.</P>
                     </Col>
@@ -309,17 +310,16 @@ export default withFormik({
     mapPropsToValues: () => ({
         firstname: '',
         lastname: '',
-        vk: '',
+        github: '',
         telegram: '',
         files: []
     }),
     handleSubmit: (values, { props, setSubmitting, setErrors }) => {
-        console.log('handleSubmit');
         const errors = validate(values);
         if (isEmptyObject(errors)) {
-            console.log('submit', values);
+            console.log('submitting', values);
+            submit(values);
         } else {
-            console.log('errors');
             setErrors(errors);
         }
     }
