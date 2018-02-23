@@ -2,6 +2,7 @@
   "name": "vintage-registration-form",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/ui",
   "dependencies": {
     "formik": "^0.11.10",
     "inferno": "^4.0.3",
