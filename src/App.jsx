@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { withFormik } from 'formik';
 import { isEmptyObject } from './utils';
+import * as masks from './masks';
 import submit from './submit';
 import Window from './Window';
 import ErrorsWrapper from './ErrorsWrapper';
@@ -77,15 +78,42 @@ class App extends Component {
                     <Col xs={12}>
                         <P>
                             Твои контакты. Если у тебя нет телеграма, придётся
-                            его сделать - мы будем общаться через него.
+                            его сделать - мы будем общаться через него. <br />
+                            <a
+                                href="http://telegramzy.ru/nik-v-telegramm/"
+                                target="_blank"
+                            >
+                                Как получить ник в Telegram?
+                            </a>
                         </P>
                         <P>
-                            Ещё мы будем работать с гитхабом, поэтому
-                            зарегистрируйся и там.
+                            Ещё мы будем работать с{' '}
+                            <a href="https://github.com/" target="_blank">
+                                гитхабом
+                            </a>, поэтому зарегистрируйся и там.
                         </P>
                     </Col>
                 </Row>
                 <RowSpacing scale={3} />
+                <Row>
+                    <Col xs={4}>
+                        <Label>VK</Label>
+                    </Col>
+                    <Col xs={8}>
+                        <Input
+                            type="text"
+                            name="vk"
+                            showMask
+                            mask={masks.vk}
+                            placeholderChar={' '}
+                            guide={false}
+                            onChange={handleChange}
+                            onBlur={this.handleBlur}
+                            value={values.vk}
+                        />
+                    </Col>
+                </Row>
+                <RowSpacing />
                 <Row>
                     <Col xs={4}>
                         <Label>GitHub</Label>
@@ -94,7 +122,12 @@ class App extends Component {
                         <Input
                             type="text"
                             name="github"
+                            showMask
+                            mask={masks.github}
+                            placeholderChar={' '}
+                            guide={false}
                             onChange={handleChange}
+                            onBlur={this.handleBlur}
                             value={values.github}
                         />
                     </Col>
@@ -108,6 +141,9 @@ class App extends Component {
                         <Input
                             type="text"
                             name="telegram"
+                            mask={masks.telegram}
+                            placeholderChar={' '}
+                            guide={false}
                             onChange={handleChange}
                             value={values.telegram}
                         />
@@ -163,7 +199,7 @@ class App extends Component {
                                 target="_blank"
                             >
                                 "Знакомство" от HTML Academy
-                            </a>
+                            </a>.
                         </P>
                         <P>
                             Если ты уже знаком(а) с HTML и CSS, это задание не
@@ -310,7 +346,7 @@ class App extends Component {
                         </Window>
                     )}
                 </ErrorsWrapper>
-                <Window title="Регистрация на курсы разработки от ITC">
+                <Window title="Регистрация на курсы от ITC">
                     <Grid fluid>
                         <Row>
                             <Col xs={12}>
@@ -381,8 +417,12 @@ const validate = values => {
         errors.lastname = 'Укажи фамилию';
     }
 
+    if (!values.vk) {
+        errors.vk = 'Укажи ссылку VK';
+    }
+
     if (!values.github) {
-        errors.github = 'Укажи ник на GitHub';
+        errors.github = 'Укажи ссылку GitHub';
     }
 
     if (!values.telegram) {
@@ -403,10 +443,6 @@ const validate = values => {
 export default withFormik({
     validateOnBlur: false,
     mapPropsToValues: () => ({
-        firstname: '',
-        lastname: '',
-        github: '',
-        telegram: '',
         files: []
     }),
     handleSubmit: (values, { props, setSubmitting, setStatus, setErrors }) => {

@@ -2,10 +2,11 @@ const submit = values => {
     const url = '/';
     const formData = new FormData();
 
-    const { firstname, lastname, github, telegram, faculty, files } = values;
+    const { firstname, lastname, vk, github, telegram, faculty, files } = values;
 
     formData.append('firstname', firstname);
     formData.append('lastname', lastname);
+    formData.append('vk', vk);
     formData.append('github', github);
     formData.append('telegram', telegram);
     formData.append('faculty', faculty);

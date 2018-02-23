@@ -64,7 +64,7 @@ class DropdownSelect extends Component {
     render() {
         const { values } = this.props;
         const { selectedIndex } = this.state;
-        const valuesWithDefault = ['Выберите...', ...values];
+        const valuesWithDefault = ['Выбери...', ...values];
 
         return (
             <Container>

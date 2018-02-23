@@ -1,6 +1,7 @@
+import MaskedInput from 'react-text-mask';
 import styled from 'styled-components';
 
-const Input = styled.input`
+const Input = styled(MaskedInput)`
     width: 100%;
     padding: 2px;
     font-size: 12px;
@@ -17,4 +18,6 @@ const Input = styled.input`
     }
 `;
 
-export default props => <Input {...props} />;
+export default ({ mask, ...restProps }) => (
+    <Input mask={mask ? mask : false} {...restProps} />
+);
