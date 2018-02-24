@@ -326,7 +326,7 @@ class App extends Component {
                                             <Center>
                                                 <Button
                                                     width="60px"
-                                                    onClick={this.resetErrors}
+                                                    onClick={this.resetStatus}
                                                 >
                                                     ОK
                                                 </Button>
