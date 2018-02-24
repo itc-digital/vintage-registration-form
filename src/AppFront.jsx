@@ -36,9 +36,9 @@ class App extends Component {
                 <Row>
                     <Col xs={12}>
                         <P>
-                            Привет! Хочешь записаться на наши курсы по бэкенду?
-                            Тогда заполни эту форму. Все поля обязательны для
-                            заполнения.
+                            Привет! Хочешь записаться на наши курсы по
+                            фронтэнду? Тогда заполни эту форму. Все поля
+                            обязательны для заполнения.
                         </P>
                         <P>Представься пожалуйста.</P>
                     </Col>
@@ -49,6 +49,7 @@ class App extends Component {
                         <Label>Имя</Label>
                     </Col>
                     <Col xs={8}>
+                        <span />
                         <Input
                             type="text"
                             name="firstname"
@@ -63,6 +64,7 @@ class App extends Component {
                         <Label>Фамилия</Label>
                     </Col>
                     <Col xs={8}>
+                        <span />
                         <Input
                             type="text"
                             name="lastname"
@@ -192,15 +194,24 @@ class App extends Component {
                 <Row>
                     <Col xs={12}>
                         <P>
-                            Прикрепи скриншот, где видно пройденные первые 6
-                            глав{' '}
-                            <a href="http://pythontutor.ru/" target="_blank">
-                                Питонтьютора
+                            Наш курс предполагает, что ты уже умеешь писать HTML
+                            и CSS. Поэтому для завершения регистрации пройди{' '}
+                            <a
+                                href="https://htmlacademy.ru/courses/4/"
+                                target="_blank"
+                            >
+                                "Знакомство" от HTML Academy
                             </a>.
                         </P>
                         <P>
-                            Не забудь зарегистрироваться на этом сайте, чтобы
-                            твой прогресс сохранялся.
+                            Если ты уже знаком(а) с HTML и CSS, это задание не
+                            займёт много времени. А если нет, то знаний,
+                            полученных от прохождения хватит для поступления к
+                            нам.
+                        </P>
+                        <P>
+                            Прикрепи скриншот, где видно пройденное "Первое
+                            испытание"
                         </P>
                     </Col>
                 </Row>
@@ -341,7 +352,7 @@ class App extends Component {
                     <Grid fluid>
                         <Row>
                             <Col xs={12}>
-                                <H1>itc backend</H1>
+                                <H1>itc frontend</H1>
                             </Col>
                         </Row>
 
@@ -425,7 +436,7 @@ const validate = values => {
     }
 
     if (!values.files.length) {
-        errors.fileds = 'Прикрепи скриншот c пройденным Питонтьютором';
+        errors.fileds = 'Прикрепи скриншот c пройденным "Знакомством"';
     }
 
     return errors;

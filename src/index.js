@@ -1,6 +1,7 @@
 import { render } from 'inferno';
 import 'normalize.css';
-import App from './App';
+import AppFront from './AppFront';
+import AppBack from './AppBack';
 import './index.css';
 
-render(<App />, document.getElementById('app')); // eslint-disable-line react/jsx-filename-extension
+render(<AppBack />, document.getElementById('app')); // eslint-disable-line react/jsx-filename-extension
